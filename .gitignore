@@ -3,3 +3,6 @@ terraform.tfstate
 terraform.tfstate.*
 terraform*
 .terraform.lock.*
+package-lock*
+package.*
+node_modules
