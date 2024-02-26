@@ -1,22 +1,22 @@
-name: Release Workflow
+name: release
 
+#on: [workflow_dispatch] "manual trigger option"
 on:
   push:
     branches:
       - main
 
 jobs:
-  run-shell-command:
+  release:
     permissions:
       contents: write
       issues: write
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3 # Clones the repository
-
-      - name: Perform Release
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: release
         run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
