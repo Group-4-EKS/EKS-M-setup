@@ -6,7 +6,7 @@ check:
 	@terraform validate
 	@terraform fmt
 plan: check
-	
+	@echo
 	@terraform init plan -out=tfplan
 apply: check
 	@echo "Running terraform apply"
