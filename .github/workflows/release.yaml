@@ -12,9 +12,6 @@ jobs:
       issues: write
       pull-requests: write
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash -euxo pipefail
     steps:
       - name: Set up Node.js
         uses: actions/setup-node@v3
