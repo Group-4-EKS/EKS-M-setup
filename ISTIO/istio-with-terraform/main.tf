@@ -1,7 +1,4 @@
 
-locals {
-  istio_charts_url = "https://istio-release.storage.googleapis.com/charts"
-}
 
 #Istio namespace
 resource "kubernetes_namespace" "istio_system" {
@@ -55,9 +52,7 @@ resource "kubectl_manifest" "kiali" {
   #depends_on = [helm_release.istio-ingress]
 }
 
-data "kubectl_file_documents" "kiali" {
-  content = file("${path.module}/manifests/kiali.yaml")
-}
+
 
 # Book info application
 resource "kubectl_manifest" "book-info" {
@@ -68,9 +63,7 @@ resource "kubectl_manifest" "book-info" {
   depends_on = [kubectl_manifest.kiali]
 }
 
-data "kubectl_file_documents" "book-info" {
-  content = file("${path.module}/manifests/bookinfo.yaml")
-}
+
 
 # Prometheus deployment
 resource "kubectl_manifest" "prometheus" {
@@ -81,9 +74,7 @@ resource "kubectl_manifest" "prometheus" {
   depends_on = [kubectl_manifest.kiali]
 }
 
-data "kubectl_file_documents" "prometheus" {
-  content = file("${path.module}/manifests/prometheus.yaml")
-}
+
 
 # Ingress gateway
 resource "helm_release" "istio_ingress" {
@@ -92,7 +83,6 @@ resource "helm_release" "istio_ingress" {
   repository       = "https://istio-release.storage.googleapis.com/charts"
   namespace        = "default"
   create_namespace = true
-  timeout = "15m"
 
   version = "1.17.1"
 
