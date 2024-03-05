@@ -5,9 +5,11 @@ check:
 	@terraform init
 	@terraform validate
 	@terraform fmt
+	
 plan: check
 	@echo "Running terraform plan"
-	@terraform init plan -out=tfplan
+	@terraform plan -out=tfplan 
+	@checkov -d
 apply: check
 	@echo "Running terraform apply"
 	@terraform apply -auto-approve
