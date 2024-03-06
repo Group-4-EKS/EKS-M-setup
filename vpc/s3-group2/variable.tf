@@ -11,7 +11,3 @@ variable "create_vpc" {
   default = true
 }
 
-variable "create_vpc345678" {
-  type    = bool
-  default = true
-}
