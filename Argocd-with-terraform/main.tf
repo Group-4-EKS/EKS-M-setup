@@ -13,7 +13,7 @@ resource "kubectl_manifest" "argocd" {
   for_each           = data.kubectl_file_documents.argocd.manifests
   yaml_body          = each.value
   override_namespace = "argocd"
-  # token--- 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
+  
 }
 
 # Argo SVC
