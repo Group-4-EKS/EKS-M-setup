@@ -52,7 +52,7 @@ resource "kubectl_manifest" "app_set" {
   ]
   for_each           = data.kubectl_file_documents.appset.manifests
   yaml_body          = each.value
-  override_namespace = "argocd"
+  override_namespace = "argocd" #edit
 }
 
 resource "kubectl_manifest" "helm_set" {
@@ -61,5 +61,5 @@ resource "kubectl_manifest" "helm_set" {
   ]
   for_each           = data.kubectl_file_documents.app-set.manifests
   yaml_body          = each.value
-  override_namespace = "argocd"
+  override_namespace = "argocd" #edit
 }
