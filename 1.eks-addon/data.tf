@@ -1,6 +1,6 @@
 
 data "aws_eks_cluster" "this" {
-  name = "demo"
+  name = ""
 }
 
 # efs assume role policy

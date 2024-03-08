@@ -1,10 +1,10 @@
 # Cluster data
 data "aws_eks_cluster" "cluster" {
-  name = "demo"  #edit
+  name = ""  #edit
 }
 
 data "aws_eks_cluster_auth" "cluster" {
-  name = "demo"  #edit
+  name = ""  #edit
 }
 
 # Namespace

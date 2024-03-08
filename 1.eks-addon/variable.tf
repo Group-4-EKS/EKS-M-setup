@@ -19,11 +19,6 @@ variable "addons" {
     {
       name    = "aws-efs-csi-driver"
       version = "v1.5.8-eksbuild.1"
-      #aws-efs-csi-driver ----- v1.5.8-eksbuild.1
-    } /*,
-    {
-      name    = "aws-ebs-csi-driver"
-      version = "v1.24.0-eksbuild.1"
-    }*/
+    } 
   ]
 }
