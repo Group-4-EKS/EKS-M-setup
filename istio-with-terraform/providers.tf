@@ -1,19 +1,3 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-    kubectl = {
-      source  = "gavinbunney/kubectl"
-      version = ">= 1.13.11"
-    }
-  }
-}
-
-provider "aws" {
-  region = "us-east-1"
-}
 
 provider "kubernetes" {
   host                   = local.host

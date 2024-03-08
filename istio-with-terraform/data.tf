@@ -1,9 +1,9 @@
 data "aws_eks_cluster" "cluster" {
-  name = "demo"
+  name = ""
 }
 
 data "aws_eks_cluster_auth" "cluster" {
-  name = "demo"
+  name = ""
 }
 
 data "kubectl_file_documents" "book-info" {

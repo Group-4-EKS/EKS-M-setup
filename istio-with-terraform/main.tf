@@ -48,8 +48,6 @@ resource "kubectl_manifest" "kiali" {
   for_each           = data.kubectl_file_documents.kiali.manifests
   yaml_body          = each.value
   override_namespace = "istio-system"
-
-  #depends_on = [helm_release.istio-ingress]
 }
 
 
@@ -167,4 +165,3 @@ resource "helm_release" "istio_ingress" {
     value = "TCP"
   }
 }
-# run this to open kiali-dashbord ===== istioctl dashboard kiali
