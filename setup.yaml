@@ -1,0 +1,44 @@
+#shared-repo-apply.yaml
+name: setup workflow
+
+on:
+  workflow_call
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  URL: ${{ secrets.JF_URL }}
+  JF_ACCESS_TOKEN: ${{ secrets.ARTIFACTORY_ACCESS_TOKEN }}
+  
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        path:
+          - s3
+          - vpc
+      
+    steps:
+      - name: clone repo
+        uses: actions/checkout@v4
+      - uses: StudistCorporation/actions-setup-terraform-credentials@v1.0.0
+        with:
+            token: $JF_ACCESS_TOKEN
+            hostname: $URL  
+      - name: set up terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: "1.1.9"
+      - name: Init
+        run: |
+          TF_PLAN="tfplan"
+          cd modules/${{ matrix.path }}
+          terraform init
+          terraform plan -out=${TF_PLAN}
+          
+          if [ ! -f "${TF_PLAN}"]; then
+            echo "****** Plan does not exist. Exiting*****"
+            exit 1
+          fi         
+          #terraform apply ${TF_PLAN}
