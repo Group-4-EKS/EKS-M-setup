@@ -1,0 +1,26 @@
+#shared-repo-build.yaml
+name: plan
+
+on:
+  workflow_call
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  URL: ${{ secrets.JF_URL }}
+  JF_ACCESS_TOKEN: ${{ secrets.ARTIFACTORY_ACCESS_TOKEN }}
+
+jobs:
+  setup:
+    uses: ./.github/workflows/setup.yaml
+    secrets: inherit
+    
+  test:
+    if: success()
+    needs: setup
+    uses: ./.github/workflows/tests.yaml
+    
+  plan:
+    if: success()
+    needs: test
+    uses: ./.github/workflows/plan.yaml
+    secrets: inherit
